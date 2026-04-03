@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Lock } from "lucide-react";
+import { ExternalLink, Lock, FileText, Network, Github } from "lucide-react";
+
+interface ProjectLink {
+  label: string;
+  href: string;
+  icon: "docs" | "topology" | "github";
+}
 
 interface Project {
   title: string;
   description: string;
   tags: string[];
   status?: "live" | "upcoming";
+  links?: ProjectLink[];
 }
 
 const projects: Project[] = [
@@ -14,18 +21,30 @@ const projects: Project[] = [
     description:
       "End-to-end network infrastructure for a multi-floor hotel with VLANs, guest isolation, and centralized management. Simulated in Cisco Packet Tracer.",
     tags: ["VLANs", "DHCP", "Cisco", "Network Security"],
+    links: [
+      { label: "Docs", href: "#", icon: "docs" },
+      { label: "Topology", href: "#", icon: "topology" },
+    ],
   },
   {
     title: "Hospital Network Design",
     description:
       "High-availability network for a hospital environment with redundant links, segmented traffic for medical devices, and HIPAA-compliant security.",
     tags: ["HA", "Firewalls", "Routing", "Redundancy"],
+    links: [
+      { label: "Docs", href: "#", icon: "docs" },
+      { label: "Topology", href: "#", icon: "topology" },
+    ],
   },
   {
     title: "Campus Network Design",
     description:
       "Scalable campus-wide network supporting thousands of users across multiple buildings with inter-VLAN routing and centralized DNS/DHCP.",
     tags: ["Scalability", "DNS", "Switching", "Design"],
+    links: [
+      { label: "Docs", href: "#", icon: "docs" },
+      { label: "Topology", href: "#", icon: "topology" },
+    ],
   },
   {
     title: "Enterprise Secure Network",
@@ -33,6 +52,10 @@ const projects: Project[] = [
       "Currently building a zero-trust enterprise network with advanced firewall policies, IDS/IPS integration, and automated monitoring.",
     tags: ["Zero Trust", "IDS/IPS", "Monitoring", "Automation"],
     status: "live",
+    links: [
+      { label: "Docs", href: "#", icon: "docs" },
+      { label: "Topology", href: "#", icon: "topology" },
+    ],
   },
   {
     title: "Cloud-Native Infrastructure & Automation",
@@ -40,8 +63,18 @@ const projects: Project[] = [
       "Upcoming project focusing on cloud infrastructure with Terraform, Kubernetes, and CI/CD pipelines for automated deployments.",
     tags: ["Cloud", "Terraform", "K8s", "CI/CD"],
     status: "upcoming",
+    links: [
+      { label: "Docs", href: "#", icon: "docs" },
+      { label: "GitHub Demo", href: "#", icon: "github" },
+    ],
   },
 ];
+
+const linkIcons = {
+  docs: FileText,
+  topology: Network,
+  github: Github,
+};
 
 const Projects = () => {
   return (
@@ -98,7 +131,9 @@ const Projects = () => {
                 )}
               </div>
               <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
@@ -108,6 +143,27 @@ const Projects = () => {
                   </span>
                 ))}
               </div>
+
+              {/* Action links */}
+              {project.links && project.links.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-border">
+                  {project.links.map((link) => {
+                    const Icon = linkIcons[link.icon];
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-primary/20 text-primary/80 hover:text-primary hover:bg-primary/10 hover:border-primary/40 transition-all duration-200"
+                      >
+                        <Icon size={13} />
+                        {link.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
