@@ -89,6 +89,8 @@ const Contact = () => {
             <a
               key={social.label}
               href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={social.label}
               className="text-muted-foreground hover:text-primary transition-colors duration-300"
             >
