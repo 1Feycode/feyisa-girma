@@ -22,8 +22,8 @@ const projects: Project[] = [
       "End-to-end network infrastructure for a multi-floor hotel with VLANs, guest isolation, and centralized management. Simulated in Cisco Packet Tracer.",
     tags: ["VLANs", "DHCP", "Cisco", "Network Security"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
