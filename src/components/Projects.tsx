@@ -32,8 +32,8 @@ const projects: Project[] = [
       "High-availability network for a hospital environment with redundant links, segmented traffic for medical devices, and HIPAA-compliant security.",
     tags: ["HA", "Firewalls", "Routing", "Redundancy"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
