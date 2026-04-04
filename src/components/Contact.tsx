@@ -82,9 +82,9 @@ const Contact = () => {
           className="flex justify-center gap-6 mt-10"
         >
           {[
-            { icon: Github, href: "#", label: "GitHub" },
+            { icon: Github, href: "https://github.com/feynet1", label: "GitHub" },
             { icon: Linkedin, href: "#", label: "LinkedIn" },
-            { icon: Mail, href: "mailto:hello@example.com", label: "Email" },
+            { icon: Mail, href: "mailto:feymesay@gmail.com", label: "Email" },
           ].map((social) => (
             <a
               key={social.label}

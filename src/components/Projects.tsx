@@ -64,8 +64,8 @@ const projects: Project[] = [
     tags: ["Cloud", "Terraform", "K8s", "CI/CD"],
     status: "upcoming",
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "GitHub Demo", href: "#", icon: "github" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "GitHub Demo", href: "https://github.com/feynet1", icon: "github" },
     ],
   },
 ];
