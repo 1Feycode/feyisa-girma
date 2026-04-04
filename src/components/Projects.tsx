@@ -22,8 +22,8 @@ const projects: Project[] = [
       "End-to-end network infrastructure for a multi-floor hotel with VLANs, guest isolation, and centralized management. Simulated in Cisco Packet Tracer.",
     tags: ["VLANs", "DHCP", "Cisco", "Network Security"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
@@ -32,8 +32,8 @@ const projects: Project[] = [
       "High-availability network for a hospital environment with redundant links, segmented traffic for medical devices, and HIPAA-compliant security.",
     tags: ["HA", "Firewalls", "Routing", "Redundancy"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
@@ -42,8 +42,8 @@ const projects: Project[] = [
       "Scalable campus-wide network supporting thousands of users across multiple buildings with inter-VLAN routing and centralized DNS/DHCP.",
     tags: ["Scalability", "DNS", "Switching", "Design"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
@@ -53,8 +53,8 @@ const projects: Project[] = [
     tags: ["Zero Trust", "IDS/IPS", "Monitoring", "Automation"],
     status: "live",
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
@@ -64,8 +64,8 @@ const projects: Project[] = [
     tags: ["Cloud", "Terraform", "K8s", "CI/CD"],
     status: "upcoming",
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "GitHub Demo", href: "#", icon: "github" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "GitHub Demo", href: "https://github.com/feynet1", icon: "github" },
     ],
   },
 ];
