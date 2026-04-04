@@ -42,8 +42,8 @@ const projects: Project[] = [
       "Scalable campus-wide network supporting thousands of users across multiple buildings with inter-VLAN routing and centralized DNS/DHCP.",
     tags: ["Scalability", "DNS", "Switching", "Design"],
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
