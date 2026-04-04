@@ -53,8 +53,8 @@ const projects: Project[] = [
     tags: ["Zero Trust", "IDS/IPS", "Monitoring", "Automation"],
     status: "live",
     links: [
-      { label: "Docs", href: "#", icon: "docs" },
-      { label: "Topology", href: "#", icon: "topology" },
+      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
+      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
     ],
   },
   {
