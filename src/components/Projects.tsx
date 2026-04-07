@@ -1,10 +1,12 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Lock, FileText, Network, Github } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Lock, FileText, Network, Github, X } from "lucide-react";
+import { useState } from "react";
 
 interface ProjectLink {
   label: string;
   href: string;
   icon: "docs" | "topology" | "github";
+  topologyImage?: string; // if set, clicking opens image modal instead of href
 }
 
 interface Project {
@@ -23,8 +25,9 @@ const projects: Project[] = [
     tags: ["VLANs", "DHCP", "NAT", "ACLs", "Cisco", "Routing"],
     status: "live",
     links: [
-      { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
-      { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },
+      { label: "Docs", href: "/small-office-network-report.pdf", icon: "docs" },
+      { label: "Topology", href: "#", icon: "topology", topologyImage: "/topology-small-office.png" },
+      { label: "GitHub", href: "https://github.com/feynet1/Small-office-network", icon: "github" },
     ],
   },
   {
@@ -88,8 +91,44 @@ const linkIcons = {
 };
 
 const Projects = () => {
+  const [topologyImg, setTopologyImg] = useState<string | null>(null);
+
   return (
     <section id="projects" className="py-20 sm:py-28 relative">
+      {/* Topology image modal */}
+      <AnimatePresence>
+        {topologyImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setTopologyImg(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-4xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setTopologyImg(null)}
+                className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+                aria-label="Close topology"
+              >
+                <X size={24} />
+              </button>
+              <img
+                src={topologyImg}
+                alt="Network Topology"
+                className="w-full rounded-xl border border-primary/30 shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -119,7 +158,6 @@ const Projects = () => {
                 project.status === "upcoming" ? "opacity-60" : ""
               }`}
             >
-              {/* Status badges */}
               {project.status === "live" && (
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-2 h-2 rounded-full bg-primary pulse-live inline-block" />
@@ -143,7 +181,6 @@ const Projects = () => {
               </div>
               <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
 
-              {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag) => (
                   <span
@@ -155,11 +192,22 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Action links */}
               {project.links && project.links.length > 0 && (
                 <div className="flex flex-wrap gap-2 pt-3 border-t border-border">
                   {project.links.map((link) => {
                     const Icon = linkIcons[link.icon];
+                    if (link.topologyImage) {
+                      return (
+                        <button
+                          key={link.label}
+                          onClick={() => setTopologyImg(link.topologyImage!)}
+                          className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md border border-primary/20 text-primary/80 hover:text-primary hover:bg-primary/10 hover:border-primary/40 transition-all duration-200"
+                        >
+                          <Icon size={13} />
+                          {link.label}
+                        </button>
+                      );
+                    }
                     return (
                       <a
                         key={link.label}

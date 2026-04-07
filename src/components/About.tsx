@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { User } from "lucide-react";
 
 const About = () => {
   return (
@@ -25,8 +24,12 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="flex justify-center"
           >
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl glass-card flex items-center justify-center border border-primary/20 cyan-glow">
-              <User className="text-primary/40" size={80} />
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl border border-primary/20 cyan-glow overflow-hidden">
+              <img
+                src="/my photo.jpg"
+                alt="Feyisa Girma"
+                className="w-full h-full object-cover object-center"
+              />
               <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent -z-10 blur-sm" />
             </div>
           </motion.div>
