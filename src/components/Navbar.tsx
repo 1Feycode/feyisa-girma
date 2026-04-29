@@ -27,10 +27,14 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2 text-primary font-mono font-semibold text-lg">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-2 text-primary font-mono font-semibold text-lg"
+            aria-label="Scroll to top"
+          >
             <Terminal size={20} />
             <span>dev.portfolio</span>
-          </a>
+          </button>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-8">

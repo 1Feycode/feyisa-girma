@@ -28,7 +28,7 @@ const Hero = () => {
             Welcome to my portfolio
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 text-foreground leading-tight">
-            Hi, I'm <span className="text-gradient-cyan">Your Name</span>
+            Hi, I'm <span className="text-gradient-cyan">Feyisa Girma</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-2 font-light">
             Network Engineer <span className="text-primary">|</span> Full-Stack Developer
