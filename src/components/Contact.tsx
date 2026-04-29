@@ -83,7 +83,7 @@ const Contact = () => {
         >
           {[
             { icon: Github, href: "https://github.com/feynet1", label: "GitHub" },
-            { icon: Linkedin, href: "#", label: "LinkedIn" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/feyisa-girma-290bb5371", label: "LinkedIn" },
             { icon: Mail, href: "mailto:feyisagirmanegessa@gmail.com", label: "Email" },
           ].map((social) => (
             <a
