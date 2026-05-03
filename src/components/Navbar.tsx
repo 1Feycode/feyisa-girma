@@ -9,6 +9,16 @@ const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
+const NAVBAR_HEIGHT = 64; // px — matches h-16
+
+const scrollToSection = (href: string) => {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+  window.scrollTo({ top, behavior: "smooth" });
+};
+
 const useActiveSection = () => {
   const [active, setActive] = useState("");
 
@@ -17,13 +27,15 @@ const useActiveSection = () => {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
-        });
+        // Pick the entry closest to the top of the viewport
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActive(`#${visible[0].target.id}`);
+        }
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      { rootMargin: `-${NAVBAR_HEIGHT}px 0px -50% 0px`, threshold: 0 }
     );
 
     ids.forEach((id) => {
@@ -50,8 +62,7 @@ const Navbar = () => {
 
   const handleClick = (href: string) => {
     setIsOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(href);
   };
 
   return (
@@ -62,19 +73,20 @@ const Navbar = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 glass"
       >
-        <div className="container mx-auto px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo — text only, no icon */}
+
+            {/* Brand */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="font-mono font-semibold text-lg text-primary tracking-tight"
+              className="font-mono font-semibold text-base sm:text-lg text-primary tracking-tight shrink-0"
               aria-label="Scroll to top"
             >
               Feyisa Girma
             </button>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Desktop nav — visible md and up */}
+            <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {navItems.map((item) => {
                 const isActive = activeSection === item.href;
                 return (
@@ -82,7 +94,9 @@ const Navbar = () => {
                     key={item.label}
                     onClick={() => handleClick(item.href)}
                     className={`relative text-sm font-medium transition-colors duration-300 ${
-                      isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
+                      isActive
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
                     }`}
                   >
                     {item.label}
@@ -95,12 +109,14 @@ const Navbar = () => {
                   </button>
                 );
               })}
+
               <button
                 onClick={() => handleClick("#contact")}
                 className="btn-primary-cyber text-sm px-4 py-2"
               >
                 Hire Me
               </button>
+
               <a
                 href="/cv.pdf"
                 download="Feyisa_Girma_CV.pdf"
@@ -113,56 +129,67 @@ const Navbar = () => {
 
             {/* Mobile toggle */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-foreground"
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="md:hidden text-foreground p-1"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile / tablet menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden glass border-t border-border"
+              transition={{ duration: 0.25 }}
+              className="md:hidden glass border-t border-border overflow-hidden"
             >
-              <div className="px-4 py-4 space-y-3">
+              <div className="px-4 py-4 space-y-1">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.href;
                   return (
                     <button
                       key={item.label}
                       onClick={() => handleClick(item.href)}
-                      className={`block w-full text-left py-2 transition-colors ${
+                      className={`flex w-full items-center text-left px-3 py-3 rounded-lg transition-colors text-sm font-medium ${
                         isActive
-                          ? "text-primary font-medium"
-                          : "text-muted-foreground hover:text-primary"
+                          ? "text-primary bg-primary/10"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                       }`}
                     >
                       {item.label}
                     </button>
                   );
                 })}
-                <a
-                  href="/cv.pdf"
-                  download="Feyisa_Girma_CV.pdf"
-                  className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors py-2"
-                >
-                  <Download size={15} />
-                  Download CV
-                </a>
+
+                <div className="pt-2 border-t border-border flex flex-col sm:flex-row gap-2">
+                  <button
+                    onClick={() => handleClick("#contact")}
+                    className="btn-primary-cyber text-sm px-4 py-2 w-full sm:w-auto text-center"
+                  >
+                    Hire Me
+                  </button>
+                  <a
+                    href="/cv.pdf"
+                    download="Feyisa_Girma_CV.pdf"
+                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 border border-border rounded-lg hover:border-primary/40"
+                  >
+                    <Download size={15} />
+                    Download CV
+                  </a>
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.nav>
 
-      {/* Scroll-to-top button */}
+      {/* Scroll-to-top FAB */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -172,7 +199,7 @@ const Navbar = () => {
             transition={{ duration: 0.2 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Scroll to top"
-            className="fixed bottom-8 right-6 z-50 w-10 h-10 rounded-full glass border border-primary/30 text-primary flex items-center justify-center hover:bg-primary/10 hover:border-primary transition-all duration-300 cyan-glow"
+            className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full glass border border-primary/30 text-primary flex items-center justify-center hover:bg-primary/10 hover:border-primary transition-all duration-300 cyan-glow"
           >
             <ArrowUp size={18} />
           </motion.button>
