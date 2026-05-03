@@ -102,6 +102,13 @@ const webProjects: Project[] = [
       { label: "Live Demo", href: "https://sulula-obse-church.vercel.app/", icon: "live" },
     ],
   },
+  {
+    title: "E-Commerce Platform",
+    description:
+      "A full-featured online store with product listings, shopping cart, order management, and payment integration.",
+    tags: ["React", "Node.js", "PostgreSQL", "Payments"],
+    status: "upcoming",
+  },
 ];
 
 const linkIcons = {

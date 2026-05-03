@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Linkedin, Github, Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, LinkedinIcon, GithubIcon, Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 // ─── EmailJS config ───────────────────────────────────────────────────────────
@@ -84,6 +84,7 @@ const Contact = () => {
                 disabled={isLoading}
                 value={form[field.id as keyof typeof form]}
                 onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
+                aria-describedby={status === "error" ? "form-status" : undefined}
                 className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors disabled:opacity-50"
                 placeholder={`Your ${field.label.toLowerCase()}`}
               />
@@ -104,6 +105,7 @@ const Contact = () => {
               disabled={isLoading}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
+              aria-describedby={status === "error" ? "form-status" : undefined}
               className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none disabled:opacity-50"
               placeholder="Your message..."
             />
@@ -111,14 +113,14 @@ const Contact = () => {
 
           {/* Feedback messages */}
           {status === "success" && (
-            <div className="flex items-center gap-2 text-sm text-primary font-medium">
-              <CheckCircle size={16} />
+            <div id="form-status" role="status" aria-live="polite" className="flex items-center gap-2 text-sm text-primary font-medium">
+              <CheckCircle size={16} aria-hidden="true" />
               Message sent! I'll get back to you soon.
             </div>
           )}
           {status === "error" && (
-            <div className="flex items-center gap-2 text-sm text-destructive font-medium">
-              <AlertCircle size={16} />
+            <div id="form-status" role="alert" aria-live="assertive" className="flex items-center gap-2 text-sm text-destructive font-medium">
+              <AlertCircle size={16} aria-hidden="true" />
               Something went wrong. Please try again or email me directly.
             </div>
           )}
@@ -151,8 +153,8 @@ const Contact = () => {
           className="flex justify-center gap-6 mt-10"
         >
           {[
-            { icon: Github, href: "https://github.com/feynet1", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/feyisa-girma-290bb5371", label: "LinkedIn" },
+            { icon: GithubIcon, href: "https://github.com/feynet1", label: "GitHub" },
+            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/feyisa-girma-290bb5371", label: "LinkedIn" },
             { icon: Mail, href: "mailto:feyisagirmanegessa@gmail.com", label: "Email" },
           ].map((social) => (
             <a

@@ -36,12 +36,16 @@ const categories: SkillCategory[] = [
       { name: "TypeScript", icon: Code2 },
       { name: "PostgreSQL", icon: Database },
       { name: "Express / FastAPI", icon: Server },
+      { name: "Supabase", icon: Database },
+      { name: "Firebase", icon: Database },
     ],
   },
   {
     title: "Tools & Platforms",
     skills: [
       { name: "Cisco Packet Tracer", icon: Network },
+      { name: "GNS3", icon: Network },
+      { name: "EVE-NG", icon: Network },
       { name: "Wireshark", icon: Search },
       { name: "Git / GitHub", icon: GitBranch },
       { name: "Docker", icon: Container },
@@ -78,7 +82,7 @@ const Skills = () => {
               >
                 <span className="text-primary">//</span> {cat.title}
               </motion.h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" role="list">
                 {cat.skills.map((skill, i) => (
                   <motion.div
                     key={skill.name}
@@ -86,10 +90,11 @@ const Skills = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.07 + catIdx * 0.1 }}
-                    whileHover={{ scale: 1.05, boxShadow: "0 0 25px hsl(187 85% 53% / 0.3)" }}
-                    className="glass-card rounded-xl p-4 flex flex-col items-center gap-3 cursor-default transition-colors hover:border-primary/40"
+                    className="glass-card rounded-xl p-4 flex flex-col items-center gap-3 transition-colors hover:border-primary/40"
+                    role="listitem"
+                    aria-label={skill.name}
                   >
-                    <skill.icon className="text-primary" size={24} />
+                    <skill.icon className="text-primary" size={24} aria-hidden="true" />
                     <span className="text-sm text-muted-foreground text-center font-medium">{skill.name}</span>
                   </motion.div>
                 ))}
