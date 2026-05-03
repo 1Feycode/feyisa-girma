@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download, ArrowUp } from "lucide-react";
+import { Menu, X, Download, ArrowUp, Sun, Moon } from "lucide-react";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -57,6 +58,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const activeSection = useActiveSection();
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -134,6 +137,15 @@ const Navbar = () => {
                 <Download size={15} />
                 CV
               </a>
+
+              {/* Theme toggle */}
+              <button
+                onClick={() => setTheme(isDark ? "light" : "dark")}
+                aria-label="Toggle theme"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-300"
+              >
+                {isDark ? <Sun size={17} /> : <Moon size={17} />}
+              </button>
             </div>
 
             {/* Mobile toggle */}
@@ -191,6 +203,14 @@ const Navbar = () => {
                     <Download size={15} />
                     Download CV
                   </a>
+                  <button
+                    onClick={() => setTheme(isDark ? "light" : "dark")}
+                    aria-label="Toggle theme"
+                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 border border-border rounded-lg hover:border-primary/40"
+                  >
+                    {isDark ? <Sun size={15} /> : <Moon size={15} />}
+                    {isDark ? "Light Mode" : "Dark Mode"}
+                  </button>
                 </div>
               </div>
             </motion.div>

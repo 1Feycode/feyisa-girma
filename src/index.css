@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Dark mode (default) ── */
   :root {
     --background: 222 47% 5%;
     --foreground: 210 40% 92%;
@@ -45,12 +46,57 @@
     --sidebar-border: 217 33% 17%;
     --sidebar-ring: 187 85% 53%;
 
-    /* Custom tokens */
     --cyan-glow: 0 0 20px hsl(187 85% 53% / 0.4);
     --cyan-glow-lg: 0 0 40px hsl(187 85% 53% / 0.3), 0 0 80px hsl(187 85% 53% / 0.1);
     --glass-bg: hsl(217 33% 10% / 0.6);
     --glass-border: hsl(217 33% 25% / 0.3);
     --gradient-dark: linear-gradient(180deg, hsl(222 47% 5%) 0%, hsl(222 71% 2%) 100%);
+  }
+
+  /* ── Light mode ── */
+  .light {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 187 75% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 93%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 93%;
+    --muted-foreground: 215 16% 40%;
+
+    --accent: 187 75% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 85%;
+    --ring: 187 75% 38%;
+
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 187 75% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 93%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 85%;
+    --sidebar-ring: 187 75% 38%;
+
+    --cyan-glow: 0 0 20px hsl(187 75% 38% / 0.25);
+    --cyan-glow-lg: 0 0 40px hsl(187 75% 38% / 0.2), 0 0 80px hsl(187 75% 38% / 0.08);
+    --glass-bg: hsl(0 0% 100% / 0.75);
+    --glass-border: hsl(214 32% 80% / 0.6);
+    --gradient-dark: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 40% 95%) 100%);
   }
 }
 
@@ -88,6 +134,11 @@
     border: 1px solid hsl(217 33% 25% / 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+
+  .light .glass-card {
+    background: hsl(0 0% 100% / 0.6);
+    border: 1px solid hsl(214 32% 80% / 0.4);
   }
 
   .cyan-glow {
