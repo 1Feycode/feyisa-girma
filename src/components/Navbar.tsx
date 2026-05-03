@@ -88,14 +88,35 @@ const Navbar = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
-            {/* Brand */}
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="font-mono font-semibold text-base sm:text-lg text-primary tracking-tight shrink-0"
-              aria-label="Scroll to top"
-            >
-              Feyisa Girma
-            </button>
+            {/* Brand + theme toggle */}
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="font-mono font-semibold text-base sm:text-lg text-primary tracking-tight"
+                aria-label="Scroll to top"
+              >
+                Feyisa Girma
+              </button>
+
+              {/* Theme toggle pill */}
+              <button
+                onClick={() => setTheme(isDark ? "light" : "dark")}
+                aria-label="Toggle theme"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-primary/30 text-xs font-mono text-muted-foreground hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300"
+              >
+                {isDark ? (
+                  <>
+                    <Sun size={13} />
+                    <span>Light</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon size={13} />
+                    <span>Dark</span>
+                  </>
+                )}
+              </button>
+            </div>
 
             {/* Desktop nav — visible md and up */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -137,15 +158,6 @@ const Navbar = () => {
                 <Download size={15} />
                 CV
               </a>
-
-              {/* Theme toggle */}
-              <button
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                aria-label="Toggle theme"
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-300"
-              >
-                {isDark ? <Sun size={17} /> : <Moon size={17} />}
-              </button>
             </div>
 
             {/* Mobile toggle */}
