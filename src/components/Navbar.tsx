@@ -70,7 +70,7 @@ const Navbar = () => {
               className="font-mono font-semibold text-lg text-primary tracking-tight"
               aria-label="Scroll to top"
             >
-              dev.portfolio
+              Feyisa Girma
             </button>
 
             {/* Desktop nav */}

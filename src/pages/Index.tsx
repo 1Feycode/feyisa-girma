@@ -15,7 +15,7 @@ const Index = () => {
       <Projects />
       <Contact />
       <footer className="py-8 text-center text-sm text-muted-foreground font-mono border-t border-border">
-        <p>© {new Date().getFullYear()} dev.portfolio — Built with precision.</p>
+        <p>© {new Date().getFullYear()} Feyisa Girma — Built with precision.</p>
       </footer>
     </div>
   );
