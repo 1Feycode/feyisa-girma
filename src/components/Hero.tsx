@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -50,6 +50,14 @@ const Hero = () => {
           </a>
           <a href="#projects" className="btn-secondary-cyber">
             View Projects
+          </a>
+          <a
+            href="/cv.pdf"
+            download="Feyisa_Girma_CV.pdf"
+            className="btn-secondary-cyber inline-flex items-center gap-2"
+          >
+            <Download size={16} />
+            Download CV
           </a>
         </motion.div>
 

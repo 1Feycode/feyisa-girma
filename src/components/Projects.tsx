@@ -51,7 +51,7 @@ const projects: Project[] = [
     description:
       "Currently building a zero-trust enterprise network with advanced firewall policies, IDS/IPS integration, and automated monitoring.",
     tags: ["Zero Trust", "IDS/IPS", "Monitoring", "Automation"],
-    status: "live",
+    status: "upcoming",
     links: [
       { label: "Docs", href: "https://github.com/feynet1", icon: "docs" },
       { label: "Topology", href: "https://github.com/feynet1", icon: "topology" },

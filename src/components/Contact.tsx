@@ -1,16 +1,48 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Linkedin, Github, Mail } from "lucide-react";
+import { Send, Linkedin, Github, Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+// ─── EmailJS config ───────────────────────────────────────────────────────────
+// 1. Sign up at https://www.emailjs.com (free tier: 200 emails/month)
+// 2. Create a Service (Gmail, Outlook, etc.) → copy the Service ID below
+// 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{message}}
+//    → copy the Template ID below
+// 4. Go to Account → API Keys → copy your Public Key below
+const EMAILJS_SERVICE_ID = "service_o2zxiea";
+const EMAILJS_TEMPLATE_ID = "template_37ywffo";
+const EMAILJS_PUBLIC_KEY = "AVNHDpS4e1BKA9vdy";
+// ─────────────────────────────────────────────────────────────────────────────
+
+type Status = "idle" | "loading" | "success" | "error";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // placeholder — hook up to backend later
-    alert("Thanks for reaching out! I'll get back to you soon.");
-    setForm({ name: "", email: "", message: "" });
+    setStatus("loading");
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const isLoading = status === "loading";
 
   return (
     <section id="contact" className="py-20 sm:py-28 relative">
@@ -39,37 +71,74 @@ const Contact = () => {
             { id: "email", label: "Email", type: "email" },
           ].map((field) => (
             <div key={field.id}>
-              <label htmlFor={field.id} className="block text-sm text-muted-foreground mb-1.5 font-medium">
+              <label
+                htmlFor={field.id}
+                className="block text-sm text-muted-foreground mb-1.5 font-medium"
+              >
                 {field.label}
               </label>
               <input
                 id={field.id}
                 type={field.type}
                 required
+                disabled={isLoading}
                 value={form[field.id as keyof typeof form]}
                 onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors disabled:opacity-50"
                 placeholder={`Your ${field.label.toLowerCase()}`}
               />
             </div>
           ))}
+
           <div>
-            <label htmlFor="message" className="block text-sm text-muted-foreground mb-1.5 font-medium">
+            <label
+              htmlFor="message"
+              className="block text-sm text-muted-foreground mb-1.5 font-medium"
+            >
               Message
             </label>
             <textarea
               id="message"
               required
               rows={5}
+              disabled={isLoading}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none disabled:opacity-50"
               placeholder="Your message..."
             />
           </div>
-          <button type="submit" className="btn-primary-cyber w-full flex items-center justify-center gap-2">
-            <Send size={16} />
-            Send Message
+
+          {/* Feedback messages */}
+          {status === "success" && (
+            <div className="flex items-center gap-2 text-sm text-primary font-medium">
+              <CheckCircle size={16} />
+              Message sent! I'll get back to you soon.
+            </div>
+          )}
+          {status === "error" && (
+            <div className="flex items-center gap-2 text-sm text-destructive font-medium">
+              <AlertCircle size={16} />
+              Something went wrong. Please try again or email me directly.
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="btn-primary-cyber w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                Sending…
+              </>
+            ) : (
+              <>
+                <Send size={16} />
+                Send Message
+              </>
+            )}
           </button>
         </motion.form>
 
