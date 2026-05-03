@@ -15,12 +15,10 @@ const scrollToSection = (href: string) => {
   const id = href.replace("#", "");
   const el = document.getElementById(id);
 
-  if (!el) {
-    console.warn(`Section not found: ${id}`);
-    return;
-  }
+  if (!el) return;
 
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+  window.scrollTo({ top, behavior: "smooth" });
 };
 
 const useActiveSection = () => {
@@ -65,9 +63,13 @@ const Navbar = () => {
   }, []);
 
   const handleClick = (href: string) => {
-    // Scroll first, then close menu so element position is stable
-    scrollToSection(href);
-    setTimeout(() => setIsOpen(false), 100);
+    if (isOpen) {
+      // Close menu first, then scroll after animation completes (250ms)
+      setIsOpen(false);
+      setTimeout(() => scrollToSection(href), 300);
+    } else {
+      scrollToSection(href);
+    }
   };
 
   return (
