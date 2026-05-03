@@ -60,7 +60,12 @@
   }
 
   html {
-    /* scroll-behavior handled programmatically via window.scrollTo */
+    scroll-behavior: smooth;
+  }
+
+  /* Offset anchor scroll targets below the fixed navbar */
+  section[id] {
+    scroll-margin-top: 64px;
   }
 
   body {

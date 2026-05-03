@@ -14,9 +14,13 @@ const NAVBAR_HEIGHT = 64; // px — matches h-16
 const scrollToSection = (href: string) => {
   const id = href.replace("#", "");
   const el = document.getElementById(id);
-  if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-  window.scrollTo({ top, behavior: "smooth" });
+
+  if (!el) {
+    console.warn(`Section not found: ${id}`);
+    return;
+  }
+
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 const useActiveSection = () => {
@@ -61,8 +65,9 @@ const Navbar = () => {
   }, []);
 
   const handleClick = (href: string) => {
-    setIsOpen(false);
+    // Scroll first, then close menu so element position is stable
     scrollToSection(href);
+    setTimeout(() => setIsOpen(false), 100);
   };
 
   return (
