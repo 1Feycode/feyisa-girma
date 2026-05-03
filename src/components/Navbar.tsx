@@ -200,28 +200,12 @@ const Navbar = () => {
                   );
                 })}
 
-                <div className="pt-2 border-t border-border flex flex-col sm:flex-row gap-2">
+                <div className="pt-2 border-t border-border">
                   <button
                     onClick={() => handleClick("#contact")}
-                    className="btn-primary-cyber text-sm px-4 py-2 w-full sm:w-auto text-center"
+                    className="btn-primary-cyber text-sm px-4 py-2 w-full text-center"
                   >
                     Hire Me
-                  </button>
-                  <a
-                    href="/cv.pdf"
-                    download="Feyisa_Girma_CV.pdf"
-                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 border border-border rounded-lg hover:border-primary/40"
-                  >
-                    <Download size={15} />
-                    Download CV
-                  </a>
-                  <button
-                    onClick={() => setTheme(isDark ? "light" : "dark")}
-                    aria-label="Toggle theme"
-                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 border border-border rounded-lg hover:border-primary/40"
-                  >
-                    {isDark ? <Sun size={15} /> : <Moon size={15} />}
-                    {isDark ? "Light Mode" : "Dark Mode"}
                   </button>
                 </div>
               </div>
