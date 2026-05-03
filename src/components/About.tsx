@@ -44,18 +44,28 @@ const About = () => {
             className="space-y-4"
           >
             <p className="text-muted-foreground leading-relaxed">
-              I'm a passionate <span className="text-foreground font-medium">Network Engineer</span> and{" "}
-              <span className="text-foreground font-medium">Full-Stack Developer</span> specializing in
-              designing secure, scalable network infrastructures for hotels, hospitals, and campuses.
+              I'm <span className="text-foreground font-medium">Feyisa Girma</span>, a 3rd-year
+              Information Technology student at{" "}
+              <span className="text-foreground font-medium">Haramaya University</span>, passionate
+              about building secure, scalable systems — both at the network layer and the application layer.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              I combine deep networking expertise — VLANs, routing, firewalls, and high-availability
-              architectures — with modern full-stack development using React, Node.js, Python, and
-              PostgreSQL to build robust, end-to-end digital solutions.
+              On the networking side, I design and simulate enterprise-grade infrastructures —
+              VLANs, routing & switching, firewalls, DHCP/DNS, and high-availability architectures
+              for hotels, hospitals, and campuses using Cisco Packet Tracer, GNS3, and EVE-NG.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              My goal is to bridge the gap between infrastructure and application development,
-              delivering solutions that are both technically excellent and user-centric.
+              On the development side, I build full-stack web applications using{" "}
+              <span className="text-foreground font-medium">React, Node.js, Python, PostgreSQL,
+              Supabase, and Firebase</span> — including a live education platform, a library
+              management system, and a church administration system.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              I'm currently working toward my{" "}
+              <span className="text-foreground font-medium">CCNA certification</span> and have a
+              long-term goal of specialising in{" "}
+              <span className="text-foreground font-medium">Cloud Engineering</span> — bridging
+              infrastructure and modern software to deliver end-to-end digital solutions.
             </p>
           </motion.div>
         </div>
