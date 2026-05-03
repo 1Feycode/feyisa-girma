@@ -167,3 +167,12 @@
     75% { transform: translateY(-30px) translateX(15px); opacity: 0.5; }
   }
 }
+
+/* Respect prefers-reduced-motion for all CSS-driven animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
