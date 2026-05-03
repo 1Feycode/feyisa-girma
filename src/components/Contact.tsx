@@ -12,7 +12,7 @@ import emailjs from "@emailjs/browser";
 const EMAILJS_SERVICE_ID = "service_o2zxiea";
 const EMAILJS_TEMPLATE_ID = "template_37ywffo";
 const EMAILJS_PUBLIC_KEY = "AVNHDpS4e1BKA9vdy";
-// ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────
 
 type Status = "idle" | "loading" | "success" | "error";
 
